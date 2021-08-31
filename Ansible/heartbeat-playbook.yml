@@ -1,0 +1,26 @@
+---
+  - name: installing and launching heartbeat
+    hosts: webservers
+    become: yes
+    tasks:                                                                                                
+                                                                                                          
+    - name: download heartbeat deb                                                                         
+      command: curl -L -O https://artifacts.elastic.co/downloads/beats/heartbeat/heartbeat-7.6.1-amd64.deb
+                                                                                                          
+    - name: install heartbeats deb                                                                       
+      command: dpkg -i heartbeat-7.6.1-amd64.deb                                                          
+                                                                                                          
+    - name: drop in heartbeat.yml                                                                          
+      copy:                                                                                               
+        src: /etc/ansible/heartbeat.reference-config.yml                                                  
+        dest: /etc/heartbeat/heartbeat.yml                                                                                                                                                      
+    - name: setup heartbeat                                                                              
+      command: heartbeat setup                                                                            
+                                                                                                          
+    - name: start heartbeat service                                                                       
+      command: service heartbeat-elastic start                                                            
+                                                                                                          
+    - name: enable service heartbeat-elastic on boot                                                               
+      systemd:                                                                                            
+        name: heartbeat-elastic                                                                           
+        enabled: yes

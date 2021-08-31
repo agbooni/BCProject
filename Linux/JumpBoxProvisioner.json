@@ -1,0 +1,77 @@
+{
+    "name": "JumpBoxProvisioner",
+    "id": "/subscriptions/603cc480-215f-433d-ad57-42715223bc1f/resourceGroups/Red-Team/providers/Microsoft.Compute/virtualMachines/JumpBoxProvisioner",
+    "type": "Microsoft.Compute/virtualMachines",
+    "location": "eastus",
+    "properties": {
+        "vmId": "d6db519c-f0fd-46b5-8e4d-8b71429a8a8c",
+        "hardwareProfile": {
+            "vmSize": "Standard_B1s"
+        },
+        "storageProfile": {
+            "imageReference": {
+                "publisher": "Canonical",
+                "offer": "UbuntuServer",
+                "sku": "18.04-LTS",
+                "version": "latest"
+            },
+            "osDisk": {
+                "osType": "Linux",
+                "name": "JumpBoxProvisioner_disk1_09ffd17de7284c6fbaa05d977a9c10ca",
+                "createOption": "FromImage",
+                "caching": "ReadWrite",
+                "managedDisk": {
+                    "storageAccountType": "Premium_LRS",
+                    "id": "/subscriptions/603cc480-215f-433d-ad57-42715223bc1f/resourceGroups/RED-TEAM/providers/Microsoft.Compute/disks/JumpBoxProvisioner_disk1_09ffd17de7284c6fbaa05d977a9c10ca"
+                },
+                "diskSizeGB": 30
+            },
+            "dataDisks": []
+        },
+        "osProfile": {
+            "computerName": "JumpBoxProvisioner",
+            "adminUsername": "redadmin",
+            "linuxConfiguration": {
+                "disablePasswordAuthentication": true,
+                "ssh": {
+                    "publicKeys": [
+                        {
+                            "path": "/home/redadmin/.ssh/authorized_keys",
+                            "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5x9DsZLf55LFIGXFTHRAIVvHVS+CZCcFqbY93Ax1vHzG33+XUR6qQEtT6XHctvTUqQZmAemM1EQhOX4p+dy5d7DrYRjNcfffLWW5IFecuX7rZ1IGpksFd22HWCE1gEO/dvZUrSmxFFzPSt7z3z9J4kSnhLIn7BQQMU2EVYkbZR9DZ7YuFKgBFX0ByDrA4lz8VnxNe6MTIviNZ7vo36oUsGLhPP25gitPAhnXvMefRnjdRtstAq+qoXXV+rmNgSuzdOfdm2sNuF5nEgn8wiVR85YMR2IsXyXkErYPQMstr/eLvVeJiEFbgcwapdVrO68emmGSKv2iOfeLb8H8DJMGp AO068975@W1855294"
+                        }
+                    ]
+                }
+            },
+            "secrets": []
+        },
+        "networkProfile": {
+            "networkInterfaces": [
+                {
+                    "id": "/subscriptions/603cc480-215f-433d-ad57-42715223bc1f/resourceGroups/Red-Team/providers/Microsoft.Network/networkInterfaces/jumpboxprovisioner72"
+                }
+            ]
+        },
+        "diagnosticsProfile": {
+            "bootDiagnostics": {
+                "enabled": true
+            }
+        },
+        "provisioningState": "Succeeded"
+    },
+    "resources": [
+        {
+            "name": "enablevmaccess",
+            "id": "/subscriptions/603cc480-215f-433d-ad57-42715223bc1f/resourceGroups/Red-Team/providers/Microsoft.Compute/virtualMachines/JumpBoxProvisioner/extensions/enablevmaccess",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "location": "eastus",
+            "properties": {
+                "autoUpgradeMinorVersion": true,
+                "provisioningState": "Succeeded",
+                "publisher": "Microsoft.OSTCExtensions",
+                "type": "VMAccessForLinux",
+                "typeHandlerVersion": "1.4",
+                "settings": {}
+            }
+        }
+    ]
+}

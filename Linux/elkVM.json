@@ -1,0 +1,77 @@
+{
+    "name": "elk-vm",
+    "id": "/subscriptions/603cc480-215f-433d-ad57-42715223bc1f/resourceGroups/Red-Team/providers/Microsoft.Compute/virtualMachines/elk-vm",
+    "type": "Microsoft.Compute/virtualMachines",
+    "location": "westus2",
+    "properties": {
+        "vmId": "38e6972f-bfdd-429f-9b34-a360b3b041d0",
+        "hardwareProfile": {
+            "vmSize": "Standard_B2s"
+        },
+        "storageProfile": {
+            "imageReference": {
+                "publisher": "Canonical",
+                "offer": "UbuntuServer",
+                "sku": "18.04-LTS",
+                "version": "latest"
+            },
+            "osDisk": {
+                "osType": "Linux",
+                "name": "elk-vm_disk1_b5670a8fffbb42c6865776ff32c43672",
+                "createOption": "FromImage",
+                "caching": "ReadWrite",
+                "managedDisk": {
+                    "storageAccountType": "Premium_LRS",
+                    "id": "/subscriptions/603cc480-215f-433d-ad57-42715223bc1f/resourceGroups/RED-TEAM/providers/Microsoft.Compute/disks/elk-vm_disk1_b5670a8fffbb42c6865776ff32c43672"
+                },
+                "diskSizeGB": 30
+            },
+            "dataDisks": []
+        },
+        "osProfile": {
+            "computerName": "elk-vm",
+            "adminUsername": "sysadmin",
+            "linuxConfiguration": {
+                "disablePasswordAuthentication": true,
+                "ssh": {
+                    "publicKeys": [
+                        {
+                            "path": "/home/sysadmin/.ssh/authorized_keys",
+                            "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDQ9iDuY0Ofq8Q35rx+bduCBI+/LqV16GFtuAfpqectTF7Mk6V/S3E5Yg72p7X8UkJ+shmeOxaX25ivJrAMfuwJG5hiFIU9sfBkCFZrGVALHOaiELXt/f2uA2l8/SXZ4YoJlGKpwdgyGTganSaudZzlUtKmwqKuAxmcH27hXlAqY0wvYN17zJKMjVii6jGsaqysq/YA2CZaWq1PfT76NLFwpbI9McPrKdIB6r9oDf3jAi3QNipbuUuLW3BVwAWv9JBVjIRwHvML5iKD/nGGNApgmuHrxuUeUXNOHI0bJgc4F8sWVBA0Tqz+0f+zdc5sR3jHuRhq2yKOWIzFDiKUSA8hGqJxebvBs/gcvtwl7TPGLxSdYoq7mZg8WckPSXnmCe8mK14c2PUoz8WVjXZSkAe7QP+jgHjERzknlsltjTidVdnrVOdN/po4td7ot+O5BHQBySOYEkpH+ZxUZ9/HPP4HOZEgfBKmaNJ4p1JHSQSpbDmLiDWvAnWyoQqysos78XE= root@0875455a70e2"
+                        }
+                    ]
+                }
+            },
+            "secrets": []
+        },
+        "networkProfile": {
+            "networkInterfaces": [
+                {
+                    "id": "/subscriptions/603cc480-215f-433d-ad57-42715223bc1f/resourceGroups/Red-Team/providers/Microsoft.Network/networkInterfaces/elk-vm156"
+                }
+            ]
+        },
+        "diagnosticsProfile": {
+            "bootDiagnostics": {
+                "enabled": true
+            }
+        },
+        "provisioningState": "Succeeded"
+    },
+    "resources": [
+        {
+            "name": "enablevmaccess",
+            "id": "/subscriptions/603cc480-215f-433d-ad57-42715223bc1f/resourceGroups/Red-Team/providers/Microsoft.Compute/virtualMachines/elk-vm/extensions/enablevmaccess",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "location": "westus2",
+            "properties": {
+                "autoUpgradeMinorVersion": true,
+                "provisioningState": "Succeeded",
+                "publisher": "Microsoft.OSTCExtensions",
+                "type": "VMAccessForLinux",
+                "typeHandlerVersion": "1.4",
+                "settings": {}
+            }
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+---
+  - name: ELK VM Config
+    hosts: elk
+    become: True
+    tasks:
+
+    - name: Set VM to use more memory
+      ansible.posix.sysctl:
+        name: vm.max_map_count
+        value: 262144
+        sysctl_set: yes
+
+    - name: Install Docker
+      apt:
+        force_apt_get: yes
+        update_cache: yes
+        name: docker.io
+        state: present
+
+    - name: Install python3-pip
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Install docker pip
+      pip:
+        name: docker
+        state: present
+
+    - name: Install elk
+      docker_container:
+        name: elk
+        image: sebp/elk:761
+        state: started
+        restart_policy: always
+        published_ports:
+          - "5601:5601"
+          - "9200:9200"
+          - "5044:5044"
+
+    - name: Enable docker service
+      systemd:
+        name: docker
+        enabled: yes
+
+    - name: Set VM to use more memory
+      ansible.posix.sysctl:
+        name: vm.max_map_count
+        value: 262144
+        sysctl_set: yes                                                                                              
