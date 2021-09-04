@@ -22,13 +22,15 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly _____, in addition to restricting _____ to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+Load balancing ensures that the application will be highly redundant, in addition to restricting access to the network.
+- The load balancer helps mitigate DoS attacks by having multiple servers runnig the same websites
+- The load balancer distributes traffic evenly among the servers running the same website when they're added to its backend pool.
+- The jumpbox allows connection from a specific machince over the internet and it is the only way to access, configured and manage the webservers and the elk server. 
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the CPU usage, memory, files system, disk IO, network IO and system logs.
 
-- Filebeat collects systems log files and forwards it to a Elasticsearch and Logstach
-- Metribeat collects CPU usage, memory usage, changes in file systems, disk IO and network IO
+- Filebeat collects systems log files and forwards it to a Elasticsearch and Logstach.
+- Metribeat collects CPU usage, memory usage, changes in file systems, disk IO and network IO.
 
 The configuration details of each machine may be found below.
 
@@ -71,10 +73,9 @@ The playbook implements the following tasks:
 - Installed sebp/elk:761 container on the elk-vm, enabled ports 5601:5601, 3200:9200, 5044:5044, and start restart policy to always
 - Enabled docker service 
 
-
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-Diagrams/docker_ps_output.png
+![docker output](Diagrams/docker_ps_output.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
@@ -87,15 +88,16 @@ We have installed the following Beats on these machines:
 - Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+- Filebeats collects system logs such as authentication, authorization from the machince is it configured to monitor.
+- Metribeats collects uptime, memory usage, CPU usage from the machince or container is configured to monitor.
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
+- Copy the filebeat-config.yml file to webserver.
+- Update the filebeat-playbook file to include docker machine
+- Run the playbook, and navigate to elastic search to check that the installation worked as expected.
 
 _TODO: Answer the following questions to fill in the blanks:_
 - _Which file is the playbook? Where do you copy it?_
