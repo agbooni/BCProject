@@ -88,20 +88,26 @@ We have installed the following Beats on these machines:
 - Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- Filebeats collects system logs such as authentication, authorization from the machince is it configured to monitor.
-- Metribeats collects uptime, memory usage, CPU usage from the machince or container is configured to monitor.
+- Filebeats collects sys.log and auth.log from the machince is it configured to monitor. See example below:
+![filebeat output](Diagrams/filebeat_output.png)
+- Metribeats collects uptime, memory usage, CPU usage and network trafic from the machince or container is configured to monitor. See example below:
+![metribeat output](Diagrams/metricbeat_output.png)
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the filebeat-config.yml file to webserver.
-- Update the filebeat-playbook file to include docker machine
-- Run the playbook, and navigate to elastic search to check that the installation worked as expected.
+- Copy the the IP configured in the ansible host file to the ansible playbook.
+- Update the playbook file to include the following:
+  - Hosts from ansible host file modified i.e webserver or db group
+  - Add task you want the provisioner to perform such as installing a package or make system configuration
+- Run the playbook, and navigate to the machine to check that the installation worked as expected.
+- The elk ansible playbook file is the elk-config file. It can be copied from the linux folder.
+- Modify the hosts in the elk-config playbook to specify which machine to want the playbook to run. The host needs to be from one of the groups in the ansible host file. 
+  - Example:
+    hosts: elk
+- Navigate to <localhost:5601> to valiadate the if elk server is up and running. 
 
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
-
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+- Command to update and run the ansible playbook
+  - vi elk-config.yml to open and modify the yml file. Save and exit
+  - Run ansible-playbooy elk-config.yml to configure the elk machine
